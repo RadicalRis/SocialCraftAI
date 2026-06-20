@@ -61,7 +61,7 @@ The locked preview simulates a paid image-generation feature. When image generat
 ## Project Structure
 
 ```text
-CaptionCraftAI
+SocialCraftAI
 ├── index.html
 ├── server.py
 ├── requirements.txt
@@ -74,13 +74,13 @@ CaptionCraftAI
 ### 1. Clone the repository
 
 ```bash
-git clone git clone https://github.com/RadicalRis/SocialCraftAI.git
+git clone https://github.com/RadicalRis/SocialCraftAI.git
 ```
 
 ### 2. Navigate into the project folder
 
 ```bash
-cd CaptionCraftAI
+cd SocialCraftAI
 ```
 
 ### 3. Create a virtual environment
@@ -157,7 +157,6 @@ This project helped me better understand how real web applications are structure
 
 Possible future upgrades include:
 
-* Add copy buttons for generated text
 * Add local content history
 * Add user accounts
 * Add real payment/subscription support for PostCraft visual generation
