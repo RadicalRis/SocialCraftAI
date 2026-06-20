@@ -74,7 +74,7 @@ CaptionCraftAI
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/RadicalRis/CaptionCraftAI.git
+git clone git clone https://github.com/RadicalRis/SocialCraftAI.git
 ```
 
 ### 2. Navigate into the project folder
