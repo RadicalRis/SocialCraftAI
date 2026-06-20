@@ -296,8 +296,8 @@ def generate_visual_post():
             "image_model": "disabled",
             "image_locked": True,
             "image_status": "locked",
-            "locked_title": "Image generation locked",
-            "locked_message": "Subscribe to unlock AI-generated post visuals. Your caption, hashtags, and image prompt are ready below."
+            "locked_title": "PostCraft visuals locked",
+            "locked_message": "Subscribe to unlock AI-generated PostCraft visuals. Your caption, hashtags, and image prompt are ready below."
         })
 
     try:
@@ -318,8 +318,8 @@ def generate_visual_post():
             "image_model": GEMINI_IMAGE_MODEL,
             "image_locked": True,
             "image_status": "quota_or_billing_required",
-            "locked_title": "Image generation unavailable",
-            "locked_message": "Image generation requires available Gemini image quota or billing. The text package still generated successfully.",
+            "locked_title": "PostCraft visuals unavailable",
+            "locked_message": "PostCraft image generation requires available Gemini image quota or billing. The text package still generated successfully.",
             "image_error": str(exc)
         })
 

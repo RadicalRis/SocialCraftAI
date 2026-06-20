@@ -1,24 +1,52 @@
-# CaptionCraft AI
+# SocialCraft AI
 
-CaptionCraft AI is a full-stack AI-powered marketing content generator designed for small businesses. The app helps users quickly create social media captions, hashtags, calls to action, and future content ideas based on their business type, platform, topic, tone, and target audience.
+SocialCraft AI is a full-stack AI-powered social media content studio designed for small businesses. It includes two main tools: **CaptionCraft**, which creates written marketing content, and **PostCraft**, which creates a complete social media post package with a locked premium visual preview.
 
 ## Overview
 
-Many small businesses need to post consistently on social media but may struggle with writing captions or coming up with content ideas. CaptionCraft AI solves this by turning simple user inputs into ready-to-use marketing content.
+Small businesses often need to post consistently on social media, but creating captions, hashtags, calls to action, and visual post ideas can take time. SocialCraft AI helps users turn simple inputs into ready-to-use social media content.
 
-The app uses a frontend form to collect details from the user, sends that information to a Flask backend, and then uses the Gemini API to generate structured marketing content.
+The app uses a frontend form to collect details from the user, sends the information to a Flask backend, and uses the Gemini API to generate structured content.
+
+## Tools
+
+### CaptionCraft
+
+CaptionCraft generates written marketing content based on the user's business type, platform, topic, tone, and target audience.
+
+It creates:
+
+* Two caption options
+* Relevant hashtags
+* A call to action
+* A future content idea
+
+### PostCraft
+
+PostCraft creates a complete social media post package based on the user's business, platform, topic, goal, style, format, colours, audience, and preferred on-image text.
+
+It creates:
+
+* A short headline for the post visual
+* A supporting subheadline
+* A matching caption
+* Relevant hashtags
+* A detailed image-generation prompt
+* A locked premium visual preview
+
+The locked preview simulates a paid image-generation feature. When image generation is disabled, users can still view the full text package and image prompt.
 
 ## Features
 
-* Generates two caption options
-* Creates relevant hashtags
-* Suggests a call to action
-* Provides a future content idea
-* Allows users to choose business type, platform, tone, topic, and target audience
-* Uses a Flask backend to handle AI requests
-* Keeps the API key secure using an environment variable
-* Can run locally on one computer
-* Can also be tested across devices on the same local network
+* AI-generated captions and hashtags
+* AI-generated calls to action and future post ideas
+* PostCraft visual package generation
+* Locked premium image preview for future subscription-style features
+* Gemini API integration
+* Flask backend for secure API handling
+* Environment variable support for API keys
+* Responsive frontend using Tailwind CSS
+* Local testing support
 
 ## Tech Stack
 
@@ -30,16 +58,6 @@ The app uses a frontend form to collect details from the user, sends that inform
 * Gemini API
 * python-dotenv
 
-## How It Works
-
-1. The user fills out the form on the webpage.
-2. The frontend sends the user input to the Flask backend.
-3. The backend creates a prompt using the form data.
-4. The backend sends the prompt to the Gemini API.
-5. Gemini returns generated marketing content.
-6. The backend sends the response back as JSON.
-7. The frontend displays the captions, hashtags, call to action, and future idea in separate cards.
-
 ## Project Structure
 
 ```text
@@ -50,8 +68,6 @@ CaptionCraftAI
 ├── .gitignore
 └── README.md
 ```
-
-The `.env` file is not included in this repository because it contains the private Gemini API key.
 
 ## Running the Project Locally
 
@@ -99,7 +115,11 @@ Create a file called `.env` in the main project folder and add your Gemini API k
 
 ```env
 GEMINI_API_KEY=your_api_key_here
+GEMINI_MODEL=gemini-2.5-flash
+GEMINI_IMAGE_MODEL=disabled
 ```
+
+`GEMINI_IMAGE_MODEL=disabled` keeps PostCraft in text-package mode and shows the locked premium visual preview instead of calling a paid/limited image-generation model.
 
 ### 7. Run the Flask server
 
@@ -115,33 +135,9 @@ In your browser, go to:
 http://127.0.0.1:5050/
 ```
 
-## Local Network Testing
-
-The app can also be accessed by another device on the same local network.
-
-In `server.py`, the Flask app can be run with:
-
-```python
-app.run(host="0.0.0.0", debug=True, port=5050, use_reloader=False)
-```
-
-Then another device on the same network can open:
-
-```text
-http://YOUR-COMPUTER-IP:5050/
-```
-
-For example:
-
-```text
-http://192.168.1.25:5050/
-```
-
-This only works when the main computer is turned on, the Flask server is running, and both devices are connected to the same network.
-
 ## Security Note
 
-The `.env` file is intentionally not uploaded to GitHub because it contains the private Gemini API key. The `.gitignore` file prevents sensitive or unnecessary files from being committed, including:
+The `.env` file is intentionally not uploaded to GitHub because it contains the private Gemini API key. The `.gitignore` file should prevent sensitive or unnecessary files from being committed, including:
 
 ```text
 .env
@@ -151,11 +147,9 @@ __pycache__/
 .DS_Store
 ```
 
-This keeps the API key private and avoids uploading large virtual environment files.
-
 ## What I Learned
 
-Through this project, I learned how to build a full-stack web application with a frontend and backend. I also learned how to connect a Python Flask server to an AI API, handle JSON responses, protect API keys using environment variables, and test a local web app across devices on the same network.
+Through this project, I learned how to build a full-stack web application with a frontend and backend. I also learned how to connect a Python Flask server to an AI API, handle JSON responses, protect API keys using environment variables, and design a product with multiple AI-powered features.
 
 This project helped me better understand how real web applications are structured, especially how the frontend, backend, and external APIs work together.
 
@@ -163,11 +157,11 @@ This project helped me better understand how real web applications are structure
 
 Possible future upgrades include:
 
-* Add copy buttons for generated captions and hashtags
-* Add a content history feature using local storage
+* Add copy buttons for generated text
+* Add local content history
 * Add user accounts
-* Add more platform-specific formatting
-* Improve error messages on the page
+* Add real payment/subscription support for PostCraft visual generation
+* Add downloadable post templates
 * Deploy the app online using a production server
 * Add screenshots or a demo video to the README
 

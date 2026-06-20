@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CaptionCraft AI</title>
+    <title>SocialCraft AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,10 +63,10 @@
             downloadLink.classList.add("hidden");
             downloadLink.removeAttribute("href");
 
-            const title = data.locked_title || "Image generation locked";
-            const message = data.locked_message || "Subscribe to unlock AI-generated visuals.";
-            const headline = data.headline || "Premium Visual";
-            const subheadline = data.subheadline || "Upgrade to generate the final image.";
+            const title = data.locked_title || "PostCraft visuals locked";
+            const message = data.locked_message || "Subscribe to unlock AI-generated PostCraft visuals.";
+            const headline = data.headline || "Premium PostCraft Visual";
+            const subheadline = data.subheadline || "Upgrade to generate the final PostCraft image.";
 
             imagePlaceholder.classList.remove("hidden");
             imagePlaceholder.innerHTML = `
@@ -97,9 +97,9 @@
                                 <p class="text-sm text-slate-600 mt-1">${subheadline}</p>
                             </div>
                             <button disabled class="w-full py-3 rounded-xl bg-brand-500 text-white font-bold opacity-70 cursor-not-allowed">
-                                Subscribe to Unlock
+                                Unlock PostCraft Visuals
                             </button>
-                            <p class="text-xs text-slate-500 mt-3">Demo paywall — image prompt is still available below.</p>
+                            <p class="text-xs text-slate-500 mt-3">Demo paywall — your PostCraft prompt is still available below.</p>
                         </div>
                     </div>
                 </div>
@@ -144,6 +144,58 @@
                 repeating-linear-gradient(45deg, #f8fafc 0 18px, #e2e8f0 18px 36px);
         }
 
+        .copy-btn {
+            border: 1px solid #e5e7eb;
+            background: white;
+            color: #64748b;
+            border-radius: 9999px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #f0f9f9;
+            border-color: #d9f0f0;
+            color: #1f5c5c;
+        }
+
+        .copy-btn-dark {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #d9f0f0;
+        }
+
+        .copy-btn-dark:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.35);
+            color: white;
+        }
+
+        .copy-btn.copied {
+            background: #d9f0f0;
+            border-color: #d9f0f0;
+            color: #132c2c;
+        }
+
+        .prompt-details summary {
+            list-style: none;
+        }
+
+        .prompt-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .prompt-arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .prompt-details[open] .prompt-arrow {
+            transform: rotate(180deg);
+        }
+
         ::selection {
             background: #d9f0f0;
             color: #132c2c;
@@ -155,10 +207,10 @@
     <header class="py-12 px-6 animate-fade-in">
         <div class="max-w-5xl mx-auto text-center">
             <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-charcoal mb-4">
-                CaptionCraft <span class="text-brand-500">AI</span>
+                SocialCraft <span class="text-brand-500">AI</span>
             </h1>
             <p class="text-slate-600 max-w-2xl mx-auto">
-                Generate captions, hashtags, CTAs, content ideas, and full AI-generated social media post visuals.
+                Your AI social media studio for captions, content ideas, and premium post visuals.
             </p>
             <div class="h-1 w-20 bg-brand-500 mx-auto rounded-full opacity-60 mt-4 mb-8"></div>
 
@@ -166,12 +218,12 @@
                 <button id="captionTab"
                     class="tab-active px-5 py-3 rounded-xl font-semibold shadow-sm border border-surface-200"
                     onclick="showTab('caption')">
-                    Caption Generator
+                    CaptionCraft
                 </button>
                 <button id="studioTab"
                     class="tab-inactive px-5 py-3 rounded-xl font-semibold shadow-sm border border-surface-200"
                     onclick="showTab('studio')">
-                    AI Post Studio
+                    PostCraft
                 </button>
             </div>
         </div>
@@ -180,7 +232,8 @@
     <main class="max-w-6xl mx-auto px-6 pb-20">
         <section id="captionSection" class="animate-slide-up">
             <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-surface-200 mb-10">
-                <h2 class="font-display text-2xl font-bold text-charcoal mb-6">Create Your Caption</h2>
+                <h2 class="font-display text-2xl font-bold text-charcoal mb-2">CaptionCraft</h2>
+                <p class="text-slate-600 mb-6">Generate captions, hashtags, CTAs, and future content ideas for your business.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -230,11 +283,11 @@
 
                 <button id="generateBtn" onclick="generateCaptionContent()"
                     class="mt-6 w-full bg-brand-500 text-white py-3 rounded-xl font-bold hover:bg-brand-900 transition disabled:opacity-60 disabled:cursor-not-allowed">
-                    Generate Content
+                    Generate Caption Package
                 </button>
 
                 <div id="loading" class="hidden mt-4 text-center text-brand-500 font-semibold animate-pulse">
-                    Generating AI captions...
+                    CaptionCraft is writing your content...
                 </div>
 
                 <div id="errorBox"
@@ -244,28 +297,43 @@
             <section class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden" id="outputSection">
                 <div
                     class="content-card bg-white rounded-2xl p-8 border border-surface-200 flex flex-col h-full shadow-sm">
-                    <h2 class="font-display text-xl font-bold text-charcoal mb-4">Caption Option 1</h2>
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <h2 class="font-display text-xl font-bold text-charcoal">Caption Option 1</h2>
+                        <button class="copy-btn" onclick="copyGeneratedText(this, 'caption1')" type="button">Copy</button>
+                    </div>
                     <p id="caption1" class="text-slate-700 leading-relaxed text-lg select-all"></p>
                 </div>
 
                 <div
                     class="content-card bg-white rounded-2xl p-8 border border-surface-200 flex flex-col h-full shadow-sm">
-                    <h2 class="font-display text-xl font-bold text-charcoal mb-4">Caption Option 2</h2>
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <h2 class="font-display text-xl font-bold text-charcoal">Caption Option 2</h2>
+                        <button class="copy-btn" onclick="copyGeneratedText(this, 'caption2')" type="button">Copy</button>
+                    </div>
                     <p id="caption2" class="text-slate-700 leading-relaxed text-lg select-all"></p>
                 </div>
 
                 <div class="content-card bg-white rounded-2xl p-8 border border-surface-200 md:col-span-2 shadow-sm">
-                    <h2 class="font-display text-xl font-bold text-charcoal mb-4">Hashtags</h2>
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <h2 class="font-display text-xl font-bold text-charcoal">Hashtags</h2>
+                        <button class="copy-btn" onclick="copyGeneratedText(this, 'hashtags')" type="button">Copy</button>
+                    </div>
                     <p id="hashtags" class="text-brand-500 font-medium select-all"></p>
                 </div>
 
                 <div class="content-card bg-brand-900 text-white rounded-2xl p-8 shadow-lg">
-                    <h2 class="font-display text-xl font-bold mb-4">Call to Action</h2>
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <h2 class="font-display text-xl font-bold">Call to Action</h2>
+                        <button class="copy-btn copy-btn-dark" onclick="copyGeneratedText(this, 'cta')" type="button">Copy</button>
+                    </div>
                     <p id="cta" class="text-brand-100 italic select-all"></p>
                 </div>
 
                 <div class="content-card bg-brand-50 rounded-2xl p-8 border border-brand-100 shadow-sm">
-                    <h2 class="font-display text-xl font-bold text-brand-900 mb-4">Future Content Idea</h2>
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <h2 class="font-display text-xl font-bold text-brand-900">Future Content Idea</h2>
+                        <button class="copy-btn" onclick="copyGeneratedText(this, 'idea')" type="button">Copy</button>
+                    </div>
                     <p id="idea" class="text-slate-700 font-medium select-all"></p>
                 </div>
             </section>
@@ -275,13 +343,13 @@
             <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-surface-200 mb-10">
                 <div class="flex items-start justify-between gap-4 mb-6">
                     <div>
-                        <h2 class="font-display text-2xl font-bold text-charcoal">AI Post Studio</h2>
+                        <h2 class="font-display text-2xl font-bold text-charcoal">PostCraft</h2>
                         <p class="text-slate-600 mt-1">
-                            Generate a full post package. Image generation is shown as a locked premium preview when API billing is disabled.
+                            Turn a post idea into a full social media package with on-image copy, caption, hashtags, and a premium locked visual preview.
                         </p>
                     </div>
                     <div class="hidden md:block text-right text-xs text-slate-500 max-w-xs">
-                        Text is generated now. Visual generation can be unlocked later with API billing/subscription.
+                        Text is generated now. Premium visuals can be unlocked later with billing or a subscription flow.
                     </div>
                 </div>
 
@@ -372,60 +440,135 @@
 
                 <button id="generateStudioBtn" onclick="generateStudioPost()"
                     class="mt-6 w-full bg-brand-500 text-white py-3 rounded-xl font-bold hover:bg-brand-900 transition disabled:opacity-60 disabled:cursor-not-allowed">
-                    Generate Post Package
+                    Generate PostCraft Package
                 </button>
 
                 <div id="studioLoading" class="hidden mt-4 text-center text-brand-500 font-semibold animate-pulse">
-                    Creating your post package...
+                    PostCraft is building your package...
                 </div>
 
                 <div id="studioError"
                     class="hidden mt-4 p-4 rounded-xl bg-red-50 text-red-700 border border-red-100"></div>
             </div>
 
-            <section id="studioOutputSection" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="content-card bg-white rounded-2xl p-6 border border-surface-200 shadow-sm lg:row-span-4">
-                    <h2 class="font-display text-xl font-bold text-charcoal mb-4">Generated Visual</h2>
+            <section id="studioOutputSection" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                <div class="content-card bg-white rounded-2xl p-6 border border-surface-200 shadow-sm">
+                    <h2 class="font-display text-xl font-bold text-charcoal mb-4">PostCraft Visual Preview</h2>
                     <div class="rounded-2xl overflow-hidden bg-slate-100 border border-surface-200">
                         <img id="studioImage" alt="Generated social media post" class="w-full h-auto object-cover hidden">
                         <div id="studioImagePlaceholder" class="p-10 text-center text-slate-500">
-                            Your generated visual preview will appear here.
+                            Your PostCraft visual preview will appear here.
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-3 mt-4">
                         <a id="downloadImageLink" href="#" download="captioncraft-post.png"
                             class="hidden inline-flex items-center justify-center px-4 py-2 rounded-xl bg-brand-500 text-white font-semibold hover:bg-brand-900 transition">
-                            Download Image
+                            Download PostCraft Image
                         </a>
                     </div>
                     <div id="studioMeta" class="mt-4 text-sm text-slate-500"></div>
                 </div>
 
-                <div class="content-card bg-white rounded-2xl p-8 border border-surface-200 shadow-sm">
-                    <h2 class="font-display text-xl font-bold text-charcoal mb-4">On-Image Copy</h2>
-                    <p id="studioHeadline" class="text-2xl font-bold text-brand-900 leading-tight select-all"></p>
-                    <p id="studioSubheadline" class="text-slate-600 mt-3 text-lg select-all"></p>
-                </div>
+                <div class="space-y-6">
+                    <div class="content-card bg-white rounded-2xl p-8 border border-surface-200 shadow-sm">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h2 class="font-display text-xl font-bold text-charcoal">On-Image Copy</h2>
+                            <button class="copy-btn" onclick="copyGeneratedText(this, ['studioHeadline', 'studioSubheadline'])" type="button">Copy</button>
+                        </div>
+                        <p id="studioHeadline" class="text-2xl font-bold text-brand-900 leading-tight select-all"></p>
+                        <p id="studioSubheadline" class="text-slate-600 mt-3 text-lg select-all"></p>
+                    </div>
 
-                <div class="content-card bg-white rounded-2xl p-8 border border-surface-200 shadow-sm">
-                    <h2 class="font-display text-xl font-bold text-charcoal mb-4">Matching Caption</h2>
-                    <p id="studioCaption" class="text-slate-700 leading-relaxed text-lg select-all"></p>
-                </div>
+                    <div class="content-card bg-white rounded-2xl p-8 border border-surface-200 shadow-sm">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h2 class="font-display text-xl font-bold text-charcoal">PostCraft Caption</h2>
+                            <button class="copy-btn" onclick="copyGeneratedText(this, 'studioCaption')" type="button">Copy</button>
+                        </div>
+                        <p id="studioCaption" class="text-slate-700 leading-relaxed text-lg select-all"></p>
+                    </div>
 
-                <div class="content-card bg-brand-50 rounded-2xl p-8 border border-brand-100 shadow-sm">
-                    <h2 class="font-display text-xl font-bold text-brand-900 mb-4">Hashtags</h2>
-                    <p id="studioHashtags" class="text-brand-700 font-medium select-all"></p>
-                </div>
+                    <div class="content-card bg-brand-50 rounded-2xl p-8 border border-brand-100 shadow-sm">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h2 class="font-display text-xl font-bold text-brand-900">Hashtags</h2>
+                            <button class="copy-btn" onclick="copyGeneratedText(this, 'studioHashtags')" type="button">Copy</button>
+                        </div>
+                        <p id="studioHashtags" class="text-brand-700 font-medium select-all"></p>
+                    </div>
 
-                <details class="content-card bg-white rounded-2xl p-6 border border-surface-200 shadow-sm">
-                    <summary class="font-display text-lg font-bold text-charcoal cursor-pointer">Image Prompt</summary>
-                    <p id="studioPrompt" class="text-slate-600 mt-4 text-sm whitespace-pre-wrap select-all"></p>
-                </details>
+                    <details id="studioPromptDetails" class="content-card prompt-details bg-white rounded-2xl p-6 border border-surface-200 shadow-sm">
+                        <summary class="font-display text-lg font-bold text-charcoal cursor-pointer flex items-center justify-between gap-3">
+                            <span>PostCraft Image Prompt</span>
+                            <span class="prompt-arrow text-slate-400 text-2xl leading-none" aria-hidden="true">⌄</span>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-surface-200">
+                            <div class="flex justify-end mb-3">
+                                <button class="copy-btn" onclick="copyGeneratedText(this, 'studioPrompt')" type="button">Copy Prompt</button>
+                            </div>
+                            <p id="studioPrompt" class="text-slate-600 text-sm whitespace-pre-wrap select-all"></p>
+                        </div>
+                    </details>
+                </div>
             </section>
         </section>
     </main>
 
     <script>
+        async function copyGeneratedText(button, elementIds) {
+            const ids = Array.isArray(elementIds) ? elementIds : [elementIds];
+            const text = ids
+                .map(id => document.getElementById(id)?.innerText?.trim() || "")
+                .filter(Boolean)
+                .join("\n\n");
+
+            if (!text) {
+                showCopyState(button, "Nothing");
+                return;
+            }
+
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    fallbackCopyText(text);
+                }
+                showCopyState(button, "Copied!");
+            } catch (error) {
+                console.error("Copy failed:", error);
+                showCopyState(button, "Failed");
+            }
+        }
+
+        function fallbackCopyText(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.setAttribute("readonly", "");
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            const successful = document.execCommand("copy");
+            document.body.removeChild(textArea);
+
+            if (!successful) {
+                throw new Error("Copy command was not successful.");
+            }
+        }
+
+        function showCopyState(button, message) {
+            const originalText = button.dataset.originalText || button.innerText;
+            button.dataset.originalText = originalText;
+            button.innerText = message;
+            button.classList.add("copied");
+
+            window.setTimeout(() => {
+                button.innerText = originalText;
+                button.classList.remove("copied");
+            }, 1400);
+        }
+
         function showTab(tab) {
             const captionSection = document.getElementById("captionSection");
             const studioSection = document.getElementById("studioSection");
@@ -496,7 +639,7 @@
                 errorBox.classList.remove("hidden");
             } finally {
                 loading.classList.add("hidden");
-                btn.innerText = "Generate Content";
+                btn.innerText = "Generate Caption Package";
                 btn.disabled = false;
             }
         }
@@ -530,7 +673,7 @@
             image.classList.add("hidden");
             image.removeAttribute("src");
             imagePlaceholder.classList.remove("hidden");
-            imagePlaceholder.innerText = "Your generated visual preview will appear here.";
+            imagePlaceholder.innerText = "Your PostCraft visual preview will appear here.";
             downloadLink.classList.add("hidden");
             downloadLink.removeAttribute("href");
 
@@ -555,7 +698,7 @@
 
                 if (!response.ok) {
                     const message = [data.error, data.details].filter(Boolean).join(" ");
-                    throw new Error(message || "Failed to generate visual post.");
+                    throw new Error(message || "Failed to generate PostCraft package.");
                 }
 
                 document.getElementById("studioHeadline").innerText = data.headline || "";
@@ -574,19 +717,19 @@
                 } else {
                     showLockedVisualPreview(data);
                     meta.innerText = data.image_status === "locked"
-                        ? "Image generation is currently locked. Text package generated successfully."
-                        : "Image generation unavailable. Text package generated successfully.";
+                        ? "PostCraft visual generation is currently locked. Text package generated successfully."
+                        : "PostCraft visual generation unavailable. Text package generated successfully.";
                 }
 
                 output.classList.remove("hidden");
             } catch (error) {
                 console.error(error);
-                errorBox.innerText = error.message || "Visual post generation failed.";
+                errorBox.innerText = error.message || "PostCraft package generation failed.";
                 errorBox.classList.remove("hidden");
             } finally {
                 loading.classList.add("hidden");
                 btn.disabled = false;
-                btn.innerText = "Generate Post Package";
+                btn.innerText = "Generate PostCraft Package";
             }
         }
 
@@ -600,10 +743,10 @@
             downloadLink.classList.add("hidden");
             downloadLink.removeAttribute("href");
 
-            const title = data.locked_title || "Image generation locked";
-            const message = data.locked_message || "Subscribe to unlock AI-generated visuals.";
-            const headline = data.headline || "Premium Visual";
-            const subheadline = data.subheadline || "Upgrade to generate the final image.";
+            const title = data.locked_title || "PostCraft visuals locked";
+            const message = data.locked_message || "Subscribe to unlock AI-generated PostCraft visuals.";
+            const headline = data.headline || "Premium PostCraft Visual";
+            const subheadline = data.subheadline || "Upgrade to generate the final PostCraft image.";
 
             imagePlaceholder.classList.remove("hidden");
             imagePlaceholder.innerHTML = `
@@ -634,9 +777,9 @@
                                 <p class="text-sm text-slate-600 mt-1">${subheadline}</p>
                             </div>
                             <button disabled class="w-full py-3 rounded-xl bg-brand-500 text-white font-bold opacity-70 cursor-not-allowed">
-                                Subscribe to Unlock
+                                Unlock PostCraft Visuals
                             </button>
-                            <p class="text-xs text-slate-500 mt-3">Demo paywall — image prompt is still available below.</p>
+                            <p class="text-xs text-slate-500 mt-3">Demo paywall — your PostCraft prompt is still available below.</p>
                         </div>
                     </div>
                 </div>
